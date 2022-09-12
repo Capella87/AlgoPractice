@@ -1,5 +1,9 @@
+.vscode/
+
 *.dll
 *.exe
 *.o
 *.obj
 *.out
+*.un~
+*.*~
