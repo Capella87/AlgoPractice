@@ -1,3 +1,5 @@
+// The implementation of character list ADT
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -37,6 +39,7 @@ list* init_list(void)
     return l;
 }
 
+// Find a proper location to insert
 node* find_location(list* l, const int r)
 {
     if (l->count + 1 < r) return NULL;

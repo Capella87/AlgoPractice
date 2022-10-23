@@ -1,3 +1,5 @@
+// Selection sort
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -16,9 +18,11 @@ void sort(int* arr, const int size)
     {
         int idx = i;
 
+        // Choose the element to be swapped
         for (int j = i - 1; j >= 0; j--)
             if (arr[j] > arr[idx])
                 idx = j;
+        // Swap two elements if the target location is changed.
         if (idx != i) swap(&arr[idx], &arr[i]);
     }
 }

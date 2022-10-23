@@ -1,3 +1,5 @@
+// Insertion sort
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -7,11 +9,13 @@ void sort(int* arr, const int size)
     {
         int temp = arr[i];
         int j = i - 1;
+        // Move every elements to the next location during the condition is satisfied
         while (j >= 0 && arr[j] > temp)
         {
             arr[j + 1] = arr[j];
             j--;
         }
+        // Place temp variable to the suitable location
         arr[j + 1] = temp;
     }
 }
