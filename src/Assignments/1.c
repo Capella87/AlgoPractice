@@ -20,7 +20,7 @@ int* buildList(int n, int min, int max)
     srand((unsigned)time(NULL)); // 아무튼 시간을 시드로 넣는다.
     
     for (int i = 0; i < n; i++) // rand()가 short만 반환해서 이런 걸 써야 한다.
-        rt[i] = ((((long)rand() << 15) | rand()) % max) + min; // 출처: 이전 시간 실습
+        rt[i] = ((((long)rand() << 15) | rand()) % (max - min)) + min; // 출처: 이전 시간 실습
     
     return rt;
 }
