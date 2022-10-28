@@ -16,23 +16,25 @@ int findPivot(int min, int max)
     return min + rand() % (max - min);
 }
 
-int inPlacePartition(int* arr, int left, int right, int k)
+void inPlacePartition(int* arr, int left, int right, int k, int* lb, int* ub)
 {
     int pivot = arr[k];
-    if (k != right) swap(&arr[k], &arr[right]);
+    if (k != left) swap(&arr[k], &arr[left]);
 
-    int i = left, j = right - 1;
-    while (i <= j)
+    *lb = left, *ub = right; // lower bound and upper bound
+    int i = left;
+
+    while (i <= *ub)
     {
-        while (i <= j && arr[i] <= pivot)
-            i++;
-        while (i <= j && pivot <= arr[j])
-            j--;
-        if (i < j) swap(&arr[i], &arr[j]);
+        if (arr[i] < pivot)
+            swap(&arr[i++], &arr[(*lb)++]); // Relocate arr[i] before the lower bound of pivot
+        else if (arr[i] == pivot)
+            i++; // It should be remained inside the boundary
+        else
+            swap(&arr[i], &arr[(*ub)--]); // Relocate arr[i] after the upper bound of pivot
+            // But i must not be moved further 
+            // because swapped element should be compared to pivot whether it is smaller or equal to the pivot.
     }
-    swap(&arr[i], &arr[right]);
-
-    return i;
 }
 
 void quick_sort(int* arr, int left, int right)
@@ -40,10 +42,11 @@ void quick_sort(int* arr, int left, int right)
     if (left >= right) return;
 
     int pivot_idx = findPivot(left, right);
-   
-    pivot_idx = inPlacePartition(arr, left, right, pivot_idx);
-    quick_sort(arr, left, pivot_idx - 1);
-    quick_sort(arr, pivot_idx + 1, right);
+
+    int lb, ub;
+    inPlacePartition(arr, left, right, pivot_idx, &lb, &ub);
+    quick_sort(arr, left, lb - 1);
+    quick_sort(arr, ub + 1, right);
 }
 
 void print_array(int* arr, int size)
@@ -56,16 +59,16 @@ void print_array(int* arr, int size)
 int main(void)
 {
     int n;
-    
+
     scanf("%d", &n);
     int* arr = (int*)malloc(sizeof(int) * n);
-    
+
     for (int i = 0; i < n; i++)
         scanf("%d", &arr[i]);
-    
+
     quick_sort(arr, 0, n - 1);
     print_array(arr, n);
-    
+
     free(arr);
     return 0;
 }
