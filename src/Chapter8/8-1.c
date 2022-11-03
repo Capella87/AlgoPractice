@@ -1,12 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+// Hash node
 typedef struct node
 {
     struct node* next;
     int key;
 } node;
 
+// Hash table
 typedef struct htable
 {
     node* chain;
@@ -37,6 +39,7 @@ node* creat_node(int key)
     return rt;
 }
 
+// Hash function
 int get_hash(int key)
 {
     return key % m;
@@ -60,6 +63,7 @@ node* find_element(htable* table, node** prev, int* r_value, int* r_seq, int key
         seq++;
     }
 
+    // Write values if arguments are NOT NULL ((void*)0)
     if (r_seq) *r_seq = seq;
     if (prev) *prev = ppos;
     
