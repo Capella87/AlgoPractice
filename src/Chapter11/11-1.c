@@ -4,13 +4,10 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
-
 #include <limits.h>
 
 #define SUBMISSION
 #define PRIM
-// #define FIRSTSEARCH
-// #define TOPOSORT
 #define UNDIGRAPH
 
 typedef struct incidence incidence;
